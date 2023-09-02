@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PaginationCommand } from 'src/app/infrastructure/pagination/pagination-command';
+import { PaginationResult } from 'src/app/infrastructure/pagination/pagination-result';
 import { environment } from 'src/environments/environment';
 import { CarteiraCommand } from '../commands/carteira-command';
-import { Carteira, PaginationResult } from '../models/carteira';
+import { Carteira } from '../models/carteira';
 import { CarteiraQueryCommand } from '../query-command/carteira-query-command';
 
 @Injectable({
@@ -14,7 +16,7 @@ export class CarteirasService {
   constructor(private http: HttpClient) {
   }
 
-  get(query: CarteiraQueryCommand): Observable<PaginationResult<Carteira>> {
+  get(query: PaginationCommand<CarteiraQueryCommand>): Observable<PaginationResult<Carteira>> {
     return this.http.get<PaginationResult<Carteira>>(`${environment.apiUrl}/carteiras`, { params: query.params() });
   }
 

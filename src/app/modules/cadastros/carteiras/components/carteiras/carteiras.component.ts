@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { PaginationCommand } from 'src/app/infrastructure/pagination/pagination-command';
+import { PaginationResult } from 'src/app/infrastructure/pagination/pagination-result';
 import { Carteira } from '../../models/carteira';
 import { CarteiraQueryCommand } from '../../query-command/carteira-query-command';
 import { CarteirasService } from '../../services/carteiras.service';
@@ -15,20 +18,29 @@ export class CarteirasComponent implements OnInit {
   constructor(private carteirasService: CarteirasService,
     private modalService: NzModalService) { }
 
-  query: CarteiraQueryCommand = new CarteiraQueryCommand();
-  carteiras?: Carteira[];
+  queryCommand: CarteiraQueryCommand = new CarteiraQueryCommand();
+  paginationCommand: PaginationCommand<CarteiraQueryCommand> = new PaginationCommand<CarteiraQueryCommand>(this.queryCommand);
+  result?: PaginationResult<Carteira>;
 
   ngOnInit(): void {
     this.pesquisar();
   }
 
+  queryParamsChange(params: NzTableQueryParams): void {
+    this.paginationCommand.page = params.pageIndex;
+    this.paginationCommand.pageSize = params.pageSize;
+
+    this.pesquisar();
+  }
+
   pesquisar(): void {
-    this.carteiras = undefined;
-    this.carteirasService.get(this.query).subscribe(result => this.carteiras = result.items);
+    this.result = undefined;
+    this.carteirasService.get(this.paginationCommand).subscribe(result => this.result = result);
   }
 
   limpar(): void {
-    this.query = new CarteiraQueryCommand();
+    this.queryCommand = new CarteiraQueryCommand();
+    this.paginationCommand = new PaginationCommand<CarteiraQueryCommand>(this.queryCommand);
     this.pesquisar();
   }
 

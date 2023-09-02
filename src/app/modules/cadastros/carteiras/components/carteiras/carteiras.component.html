@@ -16,7 +16,7 @@
     <nz-form-item>
         <nz-form-control>
             <nz-input-group nzPrefixIcon="search">
-                <input nz-input placeholder="Pesquisar" [(ngModel)]="query.query" name="query" />
+                <input nz-input placeholder="Pesquisar" [(ngModel)]="queryCommand.query" name="query" />
             </nz-input-group>
         </nz-form-control>
     </nz-form-item>
@@ -28,7 +28,9 @@
     </nz-form-item>
 </form>
 
-<nz-table #carteirasTable [nzData]="carteiras || []" nzShowSizeChanger nzSize="small">
+<nz-table #carteirasTable [nzData]="result?.items || []" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
+    [nzLoading]="!result" [nzTotal]="result?.totalItems || 0" [nzPageSize]="paginationCommand.pageSize || 0"
+    [nzPageIndex]="paginationCommand.page || 0" (nzQueryParams)="queryParamsChange($event)">
     <thead>
         <tr>
             <th>Descrição</th>

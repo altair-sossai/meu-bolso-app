@@ -10,7 +10,7 @@ import { CarteirasService } from '../../services/carteiras.service';
 })
 export class CarteiraEditComponent implements OnInit {
 
-  readonly modalData: any = inject(NZ_MODAL_DATA);
+  readonly params: any = inject(NZ_MODAL_DATA);
 
   command?: CarteiraCommand;
   errors: any;
@@ -21,8 +21,8 @@ export class CarteiraEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.modalData.carteiraId) {
-      this.pesquisar(this.modalData.carteiraId);
+    if (this.params?.carteiraId) {
+      this.pesquisar(this.params.carteiraId);
     }
     else {
       this.novo();
@@ -48,7 +48,7 @@ export class CarteiraEditComponent implements OnInit {
 
     this.busy = true;
 
-    const observable = this.modalData.carteiraId == null
+    const observable = this.params?.carteiraId == null
       ? this.carteiraService.post(this.command)
       : this.carteiraService.put(this.command);
 

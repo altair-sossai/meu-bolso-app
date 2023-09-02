@@ -3,7 +3,3 @@ export class Carteira {
     public descricao?: string;
     public saldo?: number;
 }
-
-export class PaginationResult<T>{
-    public items?: T[];
-}
