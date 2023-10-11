@@ -45,6 +45,8 @@ import { IconsProviderModule } from './icons-provider.module';
 import { CarteiraEditComponent } from './modules/cadastros/carteiras/components/carteira-edit/carteira-edit.component';
 import { CarteirasComponent } from './modules/cadastros/carteiras/components/carteiras/carteiras.component';
 import { AppRoutingModule } from './routes/app-routing.module';
+import { CategoriaEditComponent } from './modules/cadastros/categoriamovimentacao/components/categoria-edit/categoria-edit/categoria-edit.component';
+import { CategoriasComponent } from './modules/cadastros/categoriamovimentacao/components/categorias/categorias/categorias.component';
 
 registerLocaleData(pt);
 
@@ -52,7 +54,9 @@ registerLocaleData(pt);
   declarations: [
     AppComponent,
     CarteirasComponent,
-    CarteiraEditComponent
+    CarteiraEditComponent,
+    CategoriaEditComponent,
+    CategoriasComponent,
   ],
   imports: [
     BrowserModule,

@@ -66,7 +66,7 @@ export class CarteirasComponent implements OnInit {
       return;
 
     this.modalService.confirm({
-      nzTitle: 'Deseja excluir este carteira?',
+      nzTitle: 'Deseja excluir esta Carteira?',
       nzOnOk: () => {
         this.carteirasService.delete(carteiraId).subscribe(() => this.pesquisar());
       }

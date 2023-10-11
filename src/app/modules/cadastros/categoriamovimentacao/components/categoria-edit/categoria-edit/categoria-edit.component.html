@@ -1,0 +1,37 @@
+<form nz-form (ngSubmit)="salvar()" *ngIf="command">
+    <nz-form-item>
+
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="nome">Nome</nz-form-label>
+        <nz-form-control>
+            <input nz-input name="nome" [(ngModel)]="command.nome" placeholder="Nome" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="cor">Cor</nz-form-label>
+        <nz-form-control>
+            <nz-select name="cor" [(ngModel)]="command.cor" placeholder="Selecione uma cor">
+                <nz-option nzValue="verde" nzLabel="Verde">Verde</nz-option>
+                <nz-option nzValue="vermelho" nzLabel="Vermelho">Vermelho</nz-option>
+                <nz-option nzValue="cinza" nzLabel="Cinza">Cinza</nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired nzFor="previsaoGastoMes">Previsão</nz-form-label>
+        <nz-form-control>
+            <input nz-input name="previsaoGastoMes" [(ngModel)]="command.previsaoGastoMes" placeholder="Previsão de gastos do mês" />
+        </nz-form-control>
+    </nz-form-item>
+
+</form>
+
+<div *ngIf="!command" style="text-align: center;">
+    <nz-spin nzSimple nzTip="Carregando..."></nz-spin>
+</div>
+
+<div *nzModalFooter>
+    <button nz-button nzType="default" (click)="close()">Cancelar</button>
+    <button nz-button nzType="primary" (click)="salvar()" [disabled]="!command" [nzLoading]="busy">Salvar</button>
+</div>
